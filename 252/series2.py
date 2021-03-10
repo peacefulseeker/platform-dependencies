@@ -8,9 +8,9 @@ def return_at_index(ser: pd.Series, idx: int) -> object:
        the index does not exist.
     """
     try:
-        return ser.array[idx]
-    except:
-        raise IndexError
+        return ser[idx]
+    except KeyError:
+        raise
 
 
 
@@ -18,10 +18,7 @@ def get_slice(ser: pd.Series, start: int, end: int) -> pd.core.series.Series:
     """Return the slice of the given Series in the range between
     start and end.
     """
-    try:
-        return ser[start:end]
-    except:
-        raise IndexError
+    return ser[start:end]
 
 
 def get_slice_inclusive(ser: pd.Series,
@@ -29,10 +26,7 @@ def get_slice_inclusive(ser: pd.Series,
     """Return the slice of the given Series in the range between
     start and end inclusive.
     """
-    try:
-        return ser[start: end + 1]
-    except:
-        raise IndexError
+    return ser.loc[start: end]
 
 
 def return_head(ser: pd.Series, num: int) -> pd.core.series.Series:
