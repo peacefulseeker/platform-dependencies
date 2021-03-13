@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import string
+from typing import List
+
 import re
 
 EOL_PUNCTUATION = ".!?"
@@ -10,7 +12,7 @@ class Document:
     def __init__(self) -> None:
         # it is up to you how to implement this method
         # feel free to alter this method and its parameters to your liking
-        self.lines = []
+        self.lines: List[str] = []
 
     def add_line(self, line: str, index: int = None) -> Document:
         """Add a new line to the document.
@@ -106,7 +108,8 @@ class Document:
         res = filter(None, striped_line.lower().split(' '))
         return sorted(set(res))
 
-    def _remove_punctuation(self, line: str) -> str:
+    @staticmethod
+    def _remove_punctuation(line: str) -> str:
         """Remove punctuation from a line."""
         # you can use this function as helper method for
         # Document.word_count() and Document.words
