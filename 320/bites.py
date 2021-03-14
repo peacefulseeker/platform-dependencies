@@ -20,11 +20,11 @@ class BiteLevel(enum.IntEnum):
 class Bite:
     number: int
     title: str
-    level: BiteLevel
+    level: int = BiteLevel.BEGINNER
 
 
 # 3. complete the function below
 
 def create_bites(numbers: List[int], titles: List[str], levels: List[BiteLevel]):
     """Generate a generator of Bite dataclass objects"""
-    return [Bite(number, titles[index], list(levels)[index]) for index, number in enumerate(numbers)]
+    return [Bite(*args) for args in zip(numbers, titles, levels)]
