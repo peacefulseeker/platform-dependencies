@@ -29,7 +29,8 @@ def get_passing_code(json_data=json_data):
        Write to /tmp (tmp variable).
     """
     for bite in json_data['bites']:
-        code, name = bite['passing_code'], bite['bite'].split('. ')[0].replace(' ', '')
-        out_file = tmp / (name + '.py')
+        code = bite['passing_code']
+        filename = bite['bite'].split('.')[0].replace(' ', '') + '.py'
+        out_file = tmp / filename
         with open(out_file, 'w') as out:
             out.write(code)
