@@ -22,9 +22,9 @@ def calculate_score(scores: List) -> int:
        Returns int of the sum of the scores.
     """
     if not _all_scores_are_in_range(scores):
-        raise ValueError
+        raise ValueError('Includes invalid dice roll(s)')
 
-    return sum(filter(lambda score: score >= MIN_SCORE, scores))
+    return sum(score for score in scores if score >= MIN_SCORE)
 
 
 def get_winner(players: List[Player]) -> Player:
@@ -48,14 +48,12 @@ def get_winner(players: List[Player]) -> Player:
     if not all(_all_scores_are_in_range(player.scores) for player in players):
         raise ValueError
 
-    player_scores_len = [len(player.scores) for player in players]
-    if not all(score == player_scores_len[0] for score in player_scores_len):
-        raise ValueError
+    player_scores_len = {len(player.scores) for player in players}
 
-    player_scores = {player_index: calculate_score(player.scores) for player_index, player in enumerate(players)}
-    winner_index = max(player_scores, key=player_scores.get)
+    if len(player_scores_len) > 1:
+        raise ValueError('Players with different amount of score')
 
-    return players[winner_index]
+    return max(players, key=lambda player: calculate_score(player.scores))
 
 
 
