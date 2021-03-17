@@ -20,6 +20,9 @@ data = """Luke Skywalker,172,77
           Bossk,190,113
 """
 
+def _calc_bmi(mass, height):
+    return float(mass) / ((int(height) / 100) ** 2)
+
 
 def person_max_bmi(data=data):
     """Return (name, BMI float) of the character in data that
@@ -27,9 +30,9 @@ def person_max_bmi(data=data):
     champ = ()
     for line in data.strip().splitlines():
         name, height, mass = line.strip().split(',')
-        bmi = round(float(mass) / ((int(height) / 100) ** 2), 2)
+        bmi = _calc_bmi(mass, height)
         if not champ or champ[1] < bmi:
-            champ = (name, bmi)
+            champ = (name, round(bmi, 2))
 
     return champ
 
