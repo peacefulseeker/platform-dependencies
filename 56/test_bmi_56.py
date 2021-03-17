@@ -1,7 +1,6 @@
 import pytest
 
-from bmi import create_parser, handle_args
-
+from bmi_56 import create_parser, handle_args
 
 @pytest.fixture
 def parser():
@@ -9,7 +8,7 @@ def parser():
 
 
 def test_no_args_exits(parser):
-    # parser.parse_args should raise the exception but in case
+    # parse_args should raise the exception but in case
     # you raised it explicitly further down the stack let's check
     # if handle_args raises it (same applies to next test)
     with pytest.raises(SystemExit):
