@@ -16,22 +16,22 @@ def gen_rhombus(width):
          ***, width - 2, row 4
           *, width - 4, row 5
     """
-
-    def _get_stars(stars_count):
+    def _print_row(stars_count):
         return f"{STAR * stars_count : ^{width}}"
 
     stars_count = 1
-
     for row in range(1, width + 1):
         # the most middle:
         if (width // 2 + 1) == row:
-            yield(_get_stars(stars_count))
+            yield(_print_row(stars_count))
             stars_count -= 2
         elif row > width / 2:
-            yield(_get_stars(stars_count))
+            yield(_print_row(stars_count))
             stars_count -= 2
         else:
-            yield(_get_stars(stars_count))
+            yield(_print_row(stars_count))
             stars_count += 2
 
-gen_rhombus(11)
+gen = gen_rhombus(5)
+for row in gen:
+    print(row)
