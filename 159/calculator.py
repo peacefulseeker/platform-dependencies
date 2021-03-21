@@ -1,3 +1,13 @@
+import operator
+
+CALCULATIONS = {
+    '+': operator.add,
+    '-': operator.sub,
+    '/': operator.truediv,
+    '*': operator.mul,
+}
+
+
 def simple_calculator(calculation):
     """Receives 'calculation' and returns the calculated result,
 
@@ -11,16 +21,10 @@ def simple_calculator(calculation):
        Make sure you convert both numbers to ints.
        If bad data is passed in, raise a ValueError.
     """
-    num1, operator, num2 = calculation.split(' ')
+    num1, sign, num2 = calculation.split(' ')
 
-    num1 = float(num1)
-    num2 = float(num2)
-
-    if (num2 == 0 and operator == '/') or operator not in ['+', '-', '/', '*']:
+    try:
+        return CALCULATIONS[sign](float(num1), float(num2))
+    except (ValueError, KeyError, ZeroDivisionError) as ex:
+        print(ex)
         raise ValueError
-
-    return eval(f'{num1} {operator} {num2}')
-
-
-
-print(simple_calculator('-5 * -11'))

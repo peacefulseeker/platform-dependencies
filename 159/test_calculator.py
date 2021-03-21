@@ -13,6 +13,15 @@ def test_sum(arg, expected):
 
 
 @pytest.mark.parametrize("arg, expected", [
+    ('2.3 + 3', 5.3),
+    ('-5.1 + 11', 5.9),
+    ('0.1 + 0.9', 1),
+])
+def test_sum_floats(arg, expected):
+    assert simple_calculator(arg) == expected
+
+
+@pytest.mark.parametrize("arg, expected", [
     ('3 - 2', 1),
     ('16 - 11', 5),
     ('12 - 18', -6),
